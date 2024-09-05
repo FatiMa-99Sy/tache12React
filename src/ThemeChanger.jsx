@@ -42,7 +42,7 @@ function ThemeChanger() {
             type="text"
             value={polices}
             onChange={(e) => setPolices(e.target.value)}
-            placeholder="Enter font"
+            placeholder="Entrer la police"
           />
         </div>
         <button type="submit" className="envoi">Envoyer</button>
