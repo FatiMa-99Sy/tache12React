@@ -1,32 +1,58 @@
-import React from 'react'
-import { useContext } from 'react'
-import { Couleur } from './ThemeContext'
-import './ThemeChange.css'
-import { useState } from 'react'
+
+import React, { useState, useContext } from 'react';
+import { Couleur } from './ThemeContext';
+import './ThemeChange.css';
 
 function ThemeChanger() {
-  const [couleur, setCouleur] = useState("")
-  const [polices, setPolices] = useState("")
-  const { couleurPrincipale, setCouleurPrincipale, police, setPolice } = useContext(Couleur)
+  const [couleur, setCouleur] = useState('');
+  const [polices, setPolices] = useState('');
+  const { couleurPrincipale, setCouleurPrincipale, police, setPolice } = useContext(Couleur);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setCouleurPrincipale(couleur);
     setPolice(polices);
-    setCouleur("");
-    setPolices("");
+    setCouleur('');
+    setPolices('');
+  };
 
-  }
+
+  const dynamicStyle = {
+    color: couleurPrincipale || 'black', 
+    fontFamily: police || 'Arial', 
+  };
+
   return (
-    <div>
-      <form action="" onSubmit={handleSubmit}>
-        <label htmlFor="">couleurPrincipale:</label>
-        <input type="text" value={couleur} onChange={e => setCouleur(e.target.value)} />
-        <label htmlFor="">Police:</label>
-        <input type="text" value={polices} onChange={e => setPolices(e.target.value)} />
-        <button type='submit' className='envoi'>Soumettre</button>
+    <div className="theme-changer">
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="couleur">Couleur Principale:</label>
+          <input
+            id="couleur"
+            type="text"
+            value={couleur}
+            onChange={(e) => setCouleur(e.target.value)}
+            placeholder="Entrer la couleur"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="police">Police:</label>
+          <input
+            id="police"
+            type="text"
+            value={polices}
+            onChange={(e) => setPolices(e.target.value)}
+            placeholder="Enter font"
+          />
+        </div>
+        <button type="submit" className="envoi">Envoyer</button>
       </form>
+      <div className="preview" style={dynamicStyle}>
+        La theme et la Police!
+      </div>
     </div>
-  )
+  );
 }
-export default ThemeChanger
+
+export default ThemeChanger;
+
